@@ -20,11 +20,11 @@ count=0
 
 # Get total number of exchanges (minus the header and system exchanges)
 echo "Listing non-default exchanges..."
-total=$(rabbitmqctl list_exchanges -q name type | grep -v '^amq\.' | grep -v '^$' | tail -n +2 | wc -l)
+total=$(rabbitmqctl list_exchanges -q name | grep -v '^amq\.' | grep -v '^$' | tail -n +3 | wc -l)
 echo "Found $total non-default exchanges to delete"
 
 # Delete exchanges, skipping system exchanges (those starting with amq.)
-for exchange in $(rabbitmqctl list_exchanges -q name type | grep -v '^amq\.' | grep -v '^$' | tail -n +2 | awk '{print $1}'); do
+for exchange in $(rabbitmqctl list_exchanges -q name | grep -v '^amq\.' | grep -v '^$' | tail -n +3 | awk '{print $1}'); do
     echo "Attempting to delete exchange: $exchange"
     rabbitmqadmin delete exchange name="$exchange"
     ((count++))
