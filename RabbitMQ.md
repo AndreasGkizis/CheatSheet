@@ -15,7 +15,7 @@ done
 echo "Operation complete. Deleted $count queues."
 ```
 Delete Exchanges
-```
+```bash
 count=0
 
 # Get total number of exchanges (minus the header and system exchanges)
